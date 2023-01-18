@@ -1,7 +1,9 @@
 <script setup>
 import { ref } from "vue";
 import axios from "axios";
+import { useStore } from "../store/index.js";
 
+const store = useStore();
 const props = defineProps(["id"]);
 const response = ref(null);
 const emits = defineEmits(["toggleModal"]);
@@ -34,17 +36,29 @@ console.log(response.value);
       <div class="modal-inner-container">
         <button class="close-button" @click="emits('toggleModal')">X</button>
         <div class="description">
-          <p1>{{ response.original_title }}</p1>
+          <p class="p1">{{ response.original_title }}</p>
           <br />
-          <p2>Release date: {{ response.release_date }}</p2>
+          <p class="p2">Release date: {{ response.release_date }}</p>
           <br />
-          <p3>{{ response.overview }}</p3>
+          <p class="p3">{{ response.overview }}</p>
           <br />
-          <p4><a :href="`https://www.youtube.com/embed/${response.videos.results[0].key}`" target="_blank">Click here
-              for the movie trailer!</a></p4>
+          <p class="p4"><a :href="`https://www.youtube.com/embed/${response.videos.results[0].key}`" target="_blank">Click here
+              for the movie trailer!</a></p>
         </div>
+        <button class="purchase"
+          @click="
+            store.addToCart(props.id, {
+              id: response.id,
+              poster: response.poster_path,
+              title: response.title,
+              date: response.release_date,
+            })
+          "
+        >Purchase
+        </button>
       </div>
     </div>
+
   </Teleport>
 </template>
 
@@ -68,7 +82,7 @@ console.log(response.value);
   background-color: #1F2123;
   color: white;
   width: clamp(280px, 100%, 800px);
-  height: 400px;
+  height: 435px;
   position: relative;
 }
 
@@ -83,31 +97,33 @@ console.log(response.value);
   color: white;
 }
 
-p1 {
+.p1 {
   font-size: 50px;
   position: relative;
-  top: 30px;
+  top: -20px;
+  font-family: 'Inconsolata', monospace;
+  line-height: 40px;
+}
+
+.p2 {
+  font-size: 20px;
+  position: relative;
+  top: -80px;
   font-family: 'Inconsolata', monospace;
 }
 
-p2 {
+.p3 {
   font-size: 20px;
   position: relative;
-  top: 70px;
+  top: -120px;
   font-family: 'Inconsolata', monospace;
 }
 
-p3 {
+.p4 {
   font-size: 20px;
   position: relative;
-  top: 90px;
-  font-family: 'Inconsolata', monospace;
-}
-
-p4 {
-  font-size: 20px;
-  position: relative;
-  top: 110px;
+  top: -160px;
+  left: 220px;
   font-family: 'Inconsolata', monospace;
 }
 
@@ -117,5 +133,11 @@ a {
 
 a:hover {
   color: rgb(229, 9, 20);
+}
+
+.purchase {
+  position: relative;
+  top: -165px;
+  left: 330px;
 }
 </style>
