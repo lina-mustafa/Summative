@@ -44,6 +44,7 @@ const getData = async (url, params) => {
     <option value="35">Comedy</option>
     <option value="10751">Family</option>
   </select>
+  <p class="genres">Select a genre:</p>
   <div class="purchase-container">
     <img v-for="movie in store.movies" :id="movie.id" @click="openModal(movie.id)"
      :src="`https://image.tmdb.org/t/p/w500${movie.poster}`"/>
@@ -76,6 +77,7 @@ h1 {
   font-size: 100px;
   color: rgb(229, 9, 20);
 }
+
 
 select{
   margin-left: -600px;
