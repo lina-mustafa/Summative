@@ -30,16 +30,12 @@ const getData = async (url, params) => {
   }
 };
 
-
 </script>
 
 <template>
   <h1>Trending Movies:</h1>
-  <!--<div v-for="movie in store.movies" class="grid-container">
-    <img @click="openModal(result.id)" v-bind:src="'http://image.tmdb.org/t/p/w500/' + result.poster_path">
-  </div>-->
   <RouterLink to="/cart" custom v-slot="{ navigate }">
-    <button @click="navigate" role="link">Cart</button>
+    <button @click="navigate" role="link"><i class="fa fa-shopping-cart"> Cart</i></button>
   </RouterLink>
   <select v-model="genre" @change="getGenres()">
     <option value="28">Action</option>
@@ -50,13 +46,14 @@ const getData = async (url, params) => {
   </select>
   <div class="purchase-container">
     <img v-for="movie in store.movies" :id="movie.id" @click="openModal(movie.id)"
-      :src="`https://image.tmdb.org/t/p/w500${movie.poster}`" />
+     :src="`https://image.tmdb.org/t/p/w500${movie.poster}`"/>
     <SiteModal v-if="showModal" @toggleModal="closeModal()" :id="selectedId" />
   </div>
 </template>
 
 <style scoped>
 @import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css");
 
 .purchase-container {
   display: grid;
@@ -68,7 +65,7 @@ const getData = async (url, params) => {
 
 img {
   width: 250px;
-  margin-top: 50px;
+  margin-top: 30px;
   margin-bottom: 50px;
   aspect-ratio: 2 / 3;
   cursor: pointer;
@@ -79,4 +76,27 @@ h1 {
   font-size: 100px;
   color: rgb(229, 9, 20);
 }
+
+select{
+  margin-left: -600px;
+  margin-top: -250px;
+  padding: 10px;
+  position: absolute;
+  font-size: 20px;
+  border-color: rgb(229, 9, 20);
+  border-radius: 5px;
+  border-width: 5px;
+  cursor: pointer;
+}
+
+button {
+  margin-top: -250px;
+  margin-left: 470px;
+  position: absolute;
+  font-size: 20px;
+  border-color: rgb(229, 9, 20);
+  border-width: 5px;
+  border-radius: 5px;
+}
+
 </style>
