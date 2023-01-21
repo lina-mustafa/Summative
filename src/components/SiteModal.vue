@@ -45,16 +45,17 @@ console.log(response.value);
           <p class="p4"><a :href="`https://www.youtube.com/embed/${response.videos.results[0].key}`" target="_blank">Click here
               for the movie trailer!</a></p>
         </div>
-        <button class="purchase"
+        <button class="purchase" 
           @click="
             store.addToCart(props.id, {
               id: response.id,
               poster: response.poster_path,
               title: response.title,
               date: response.release_date,
+              overview: response.overview,
             })
           "
-        >Purchase
+        ><font-awesome-icon icon="fa-solid fa-cart-plus" /> Add to cart
         </button>
       </div>
     </div>
@@ -101,8 +102,9 @@ console.log(response.value);
   font-size: 50px;
   position: relative;
   top: -20px;
-  font-family: 'Inconsolata', monospace;
   line-height: 40px;
+  font-family: 'Bebas Neue', cursive;
+  color: rgb(229, 9, 20);
 }
 
 .p2 {

@@ -34,8 +34,9 @@ const getData = async (url, params) => {
 
 <template>
   <h1>Trending Movies:</h1>
+  <p>Select a genre:</p>
   <RouterLink to="/cart" custom v-slot="{ navigate }">
-    <button @click="navigate" role="link"><i class="fa fa-shopping-cart"> Cart</i></button>
+    <button @click="navigate" role="link"><font-awesome-icon icon="fa-solid fa-cart-shopping" /> Cart</button>
   </RouterLink>
   <select v-model="genre" @change="getGenres()">
     <option value="28">Action</option>
@@ -44,7 +45,9 @@ const getData = async (url, params) => {
     <option value="35">Comedy</option>
     <option value="10751">Family</option>
   </select>
-  <p class="genres">Select a genre:</p>
+  <RouterLink to="/" custom v-slot="{ navigate }">
+    <button class="home" @click="navigate" role="link"><font-awesome-icon icon="fa-solid fa-house" /> Home</button>
+  </RouterLink>
   <div class="purchase-container">
     <img v-for="movie in store.movies" :id="movie.id" @click="openModal(movie.id)"
      :src="`https://image.tmdb.org/t/p/w500${movie.poster}`"/>
@@ -54,7 +57,7 @@ const getData = async (url, params) => {
 
 <style scoped>
 @import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
-@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css");
+@import url("https://fonts.googleapis.com/css2?family=Sofia+Sans&display=swap");
 
 .purchase-container {
   display: grid;
@@ -78,27 +81,39 @@ h1 {
   color: rgb(229, 9, 20);
 }
 
+p {
+  margin-top: -50px ;
+  padding-bottom: 70px;
+  font-size: 25px;
+  font-family: 'Inconsolata', monospace;
+}
 
-select{
-  margin-left: -600px;
-  margin-top: -250px;
-  padding: 10px;
+select {
+  margin-left: -55px;
+  margin-top: -80px;
+  padding: 5px ; 
   position: absolute;
   font-size: 20px;
   border-color: rgb(229, 9, 20);
   border-radius: 5px;
   border-width: 5px;
   cursor: pointer;
+  font-family: 'Sofia Sans', sans-serif;
 }
 
 button {
-  margin-top: -250px;
+  margin-top: -310px;
   margin-left: 470px;
   position: absolute;
   font-size: 20px;
   border-color: rgb(229, 9, 20);
   border-width: 5px;
   border-radius: 5px;
+}
+
+.home {
+  margin-top: -310px;
+  margin-left: -590px;
 }
 
 </style>
